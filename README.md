@@ -5,4 +5,6 @@ This code repository contains examples of SQL that I have written. In this portf
 
 The examples cover a range of topics including creating tables, inserting data, updating records, selecting and filtering data, and using aggregate functions. Each example includes comments explaining the purpose and functionality of the code.
 
-Feel free to browse the examples and reach out if you have any questions or feedback. Thank you for visiting!
+Feel free to browse the examples and reach out to my email if you have any questions or feedback. Thank you for visiting!
+
+### carlos.mendoza.analytics@gmail.com
