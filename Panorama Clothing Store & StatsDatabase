@@ -1,0 +1,29 @@
+--Create a clothing store database
+
+CREATE TABLE PANORAMA (ID INTEGER PRIMARY KEY, ITEM TEXT, COLOR TEXT, QUANTITY INTEGER, PRICE REAL);
+
+INSERT INTO PANORAMA VALUES
+(1, "SHORTS", "BLUE", 5, 20.00),
+(2, "SHORTS", "BLACK", 6, 20.00),
+(3, "SHORTS", "WHITE", 6, 20.00),
+(4, "JEANS", "GREY", 10, 40.00),
+(5, "JEANS", "BLACK", 16, 40.00),
+(6, "JEANS", "WHITE", 22, 40.00),
+(7, "POLOS", "RED", 7, 15.00),
+(8, "POLOS", "YELLOW", 4, 15.00),
+(9, "POLOS", "WHITE", 12, 15.00),
+(10, "POLOS", "BLACK", 15, 15.00),
+(11, "POLOS", "GREEN", 3, 15.00),
+(12, "LONG SLEEVE", "WHITE", 12, 18.00),
+(13, "LONG SLEEVE", "BLACK", 18, 18.00),
+(14, "LONG SLEEVE", "GREY", 29, 18.00),
+(15, "LONG SLEEVE", "BLUE", 33, 18.00);
+
+--Display the database ordered by price
+SELECT * FROM PANORAMA ORDER BY PRICE;
+
+--Display the maximum price out of the all the clothes in the database
+SELECT MAX(PRICE) FROM PANORAMA;
+
+--Display the sum of all the clothes available in the database
+SELECT SUM(QUANTITY) FROM PANORAMA;
