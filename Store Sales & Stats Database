@@ -1,0 +1,67 @@
+-- Create the sales_data table
+CREATE TABLE sales_data (
+    date INTEGER,
+    salesperson TEXT,
+    product TEXT,
+    category TEXT,
+    quantity INTEGER,
+    price REAL,
+    total REAL
+);
+
+-- Insert some sample data into the sales_data table
+INSERT INTO sales_data (date, salesperson, product, category, quantity, price, total) VALUES
+    ('2022-01-01', 'John Smith', 'Phone', 'electronics', 2, 500, 1000),
+    ('2022-01-01', 'John Smith', 'Laptop', 'electronics', 1, 1000, 1000),
+    ('2022-01-02', 'Jane Doe', 'Headphones', 'electronics', 3, 100, 300),
+    ('2022-01-02', 'Jane Doe', 'T-Shirt', 'clothing', 5, 20, 100),
+    ('2022-01-03', 'John Smith', 'Book', 'books', 2, 10, 20),
+    ('2022-01-03', 'John Smith', 'Phone Case', 'electronics', 1, 25, 25),
+    ('2022-01-04', 'Jane Doe', 'Sunglasses', 'accessories', 1, 50, 50),
+    ('2022-01-05', 'John Smith', 'Tablet', 'electronics', 2, 800, 1600),
+    ('2022-01-05', 'John Smith', 'TV', 'electronics', 1, 1500, 1500),
+    ('2022-01-05', 'Jane Doe', 'Dress', 'clothing', 1, 50, 50);
+
+SELECT * FROM sales_data;
+
+--What are the average, max, and min values for quantity and price?
+SELECT AVG(quantity) AS avg_quantity, MAX(quantity) AS max_quantity, MIN(quantity) AS min_quantity, AVG(price) AS avg_price, MAX(price) AS max_price, MIN(price) AS min_price FROM sales_data;
+
+--What is the total revenue for each category, and which categories had revenue over a certain amount (using HAVING)?
+SELECT category, SUM(total) AS total_revenue FROM sales_data GROUP BY category HAVING total_revenue > 1000;
+
+--Can we group product into different price ranges, and what is the total revenue for each range (using CASE)?
+SELECT
+CASE
+WHEN price <= 100 THEN '0-100'
+WHEN price <= 500 THEN '101-500'
+WHEN price <= 1000 THEN '501-1000'
+ELSE '1001+'
+END AS price_range, SUM(total) AS total_revenue
+FROM sales_data
+GROUP BY price_range;
+
+--What were the top-selling products each month, and how did sales of those products change over time (using advanced GROUP BY and ORDER BY)?
+SELECT
+strftime('%m', date) AS month,
+product,
+SUM(quantity) AS total_sales
+FROM sales_data
+GROUP BY month, product
+ORDER BY month, total_sales DESC;
+
+--What was the overall profit margin for each sale, and what were the most profitable products (using advanced SELECT statements and calculations)?
+SELECT
+date,
+salesperson,
+product,
+category,
+quantity,
+price,
+total,
+(total - (quantity * price)) AS profit_margin
+FROM sales_data
+ORDER BY profit_margin DESC;
+
+--Can we filter the data to show sales during a specific time period, for a specific category, or by a specific salesperson (using WHERE, AND, and OR)?
+SELECT * FROM sales_data WHERE date BETWEEN '2022-01-01' AND '2022-01-03' AND category = 'electronics' OR salesperson = 'Jane Doe';
