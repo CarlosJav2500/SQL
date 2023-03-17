@@ -226,7 +226,7 @@ SELECT MAX(population) FROM countries;
 SELECT MIN(population) FROM countries;
 SELECT AVG(population) FROM countries;
 
---
+
 SELECT SUM(population) AS "Total_world_population" FROM countries;
 
 SELECT name, SUM(population) AS "TOP_10_most_populated" FROM countries GROUP BY name HAVING "TOP_10_most_populated" >100000000 LIMIT 10;
