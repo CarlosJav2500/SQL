@@ -1,0 +1,93 @@
+/*In this project, you’re going to make your own table with some small set of “famous people”, then make more tables about things they do and join those to create nice human readable lists.
+
+For example, here are types of famous people and the questions your data could answer:
+
+Movie stars: What movies are they in? Are they married to each other?
+Singers: What songs did they write? Where are they from?
+Authors: What books did they write?
+Fictional characters: How are they related to other characters? What books do they show up in?/*
+
+/* Create table about the people and what they do here */
+CREATE TABLE famous_people (
+id INTEGER PRIMARY KEY,
+name TEXT,
+profession TEXT,
+nationality TEXT,
+year_of_birth INTEGER
+);
+
+INSERT INTO famous_people (id, name, profession, nationality, year_of_birth) VALUES
+(1, 'Leonardo DiCaprio', 'Movie Star', 'American', 1974),
+(2, 'Beyoncé Knowles', 'Singer', 'American', 1981),
+(3, 'J.K. Rowling', 'Author', 'British', 1965),
+(4, 'Sherlock Holmes', 'Fictional Character', "British", 1970);
+
+CREATE TABLE movies (
+id INTEGER PRIMARY KEY,
+title TEXT,
+year INTEGER,
+famous_person_id INTEGER);
+
+INSERT INTO movies (id, title, year, famous_person_id) VALUES
+(1, 'Titanic', 1997, 1),
+(2, 'Inception', 2010, 1);
+
+CREATE TABLE songs (
+id INTEGER PRIMARY KEY,
+title TEXT,
+album TEXT,
+release_year INTEGER,
+singer_id INTEGER);
+
+INSERT INTO songs (id, title, album, release_year, singer_id) VALUES
+(1, 'Crazy in Love', 'Dangerously in Love', 2003, 2),
+(2, 'Formation', 'Lemonade', 2016, 2);
+
+CREATE TABLE books (
+id INTEGER PRIMARY KEY,
+title TEXT,
+genre TEXT,
+publication_year INTEGER,
+author_id INTEGER);
+
+INSERT INTO books (id, title, genre, publication_year, author_id) VALUES
+(1, 'Harry Potter and the Philosopher''s Stone', 'Fantasy', 1997, 3),
+(2, 'Harry Potter and the Chamber of Secrets', 'Fantasy', 1998, 3);
+
+CREATE TABLE related_characters (
+id INTEGER PRIMARY KEY,
+name TEXT,
+related_to TEXT,
+book_id INTEGER);
+
+INSERT INTO related_characters (id, name, related_to, book_id) VALUES
+(1, 'Sherlock Holmes', 'Dr. John Watson', 4),
+(2, 'Dr. John Watson', 'Sherlock Holmes', 4);
+
+
+
+SELECT * FROM famous_people;
+SELECT * FROM movies;
+SELECT * FROM songs;
+SELECT * FROM books;
+SELECT * FROM related_characters;
+
+
+
+SELECT famous_people.name, books.title, books.genre, books.publication_year
+FROM famous_people
+LEFT JOIN books ON famous_people.id = books.author_id
+WHERE famous_people.profession = 'Author';
+
+
+SELECT famous_people.name, songs.title, songs.album, songs.release_year
+FROM famous_people
+LEFT JOIN songs ON famous_people.id = songs.singer_id
+WHERE famous_people.profession = 'Singer';
+
+
+SELECT famous_people.name, movies.title
+FROM famous_people
+LEFT JOIN movies
+ON famous_people.id = movies.famous_person_id
+WHERE famous_people.profession = 'Movie Star';
