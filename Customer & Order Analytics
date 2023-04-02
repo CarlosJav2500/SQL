@@ -1,9 +1,8 @@
+--#In this SQL, I'm querying a database with multiple tables in it to quantify statistics about customer and order data. 
+
 SELECT * FROM BIT_DB.customers
 WHERE length(order_id) = 6
 AND order_id <> 'Order ID';
-
-SELECT * FROM BIT_DB.JanSales;
-SELECT * FROM BIT_DB.FebSales;
 
 --1. How many orders were placed in January? 
 SELECT COUNT(orderID) FROM BIT_DB.JanSales
