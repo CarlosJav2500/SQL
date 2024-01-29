@@ -1,0 +1,17 @@
+/*I´ll be querying a bank database to see which product is the best option for a certain customer*/
+
+
+/*This customer is interested in opening a Checking or Savings account, but wants more information on the options.*/
+/*Here I wrote a query that uses OR to show the product names that have a Checking OR Savings product type.*/
+SELECT product_name, product_type
+FROM bank_products
+WHERE product_type = 'Savings'
+OR product_type = 'Checking';
+
+/*Now the customer decided they want a savings account with a good interest rate and no monthly fee*/
+/* Here I wrote a query that uses AND to show the product names that have a "Savings" product type AND have an interest_rate of at least 0.75, AND have no monthly fee.*/
+SELECT product_name, product_type, interest_rate, monthly_fee
+FROM bank_products
+WHERE product_type = 'Savings' 
+AND interest_rate >= 0.75
+AND monthly_fee = 0.00;
